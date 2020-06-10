@@ -1,7 +1,7 @@
 package mareklowy.planday.challange
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import mareklowy.planday.challange.fragments.EmployeeListFragment
 import mareklowy.planday.challange.helpers.ScreenManager
 
@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Load EmployeeListFragment
         ScreenManager.replaceFrame(this, EmployeeListFragment().apply {
             //Data
         }, false)
