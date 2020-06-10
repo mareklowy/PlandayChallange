@@ -3,16 +3,15 @@ package mareklowy.planday.challange.api
 //import mareklowy.planday.challange.BuildConfig
 import mareklowy.planday.challange.BuildConfig
 import mareklowy.planday.challange.api.responses.AuthResponse
+import mareklowy.planday.challange.api.responses.GetEmployeesResponse
 import mareklowy.planday.challange.helpers.Constants
+import mareklowy.planday.challange.helpers.Variables
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface RouterInterface {
@@ -52,9 +51,11 @@ interface RouterInterface {
         @Field("refresh_token") refresh_token: String = Constants.REFRESH_TOKEN
     ): Call<AuthResponse>
 
-    /* @GET("articles/all")
-     fun getArticles(
-     ): Call<List<Article>>*/
+    @GET("hr/v1.0/employees")
+    fun getEmployees(
+        @Header("X-ClientId") client_id: String = Constants.CLIENT_ID,
+        @Header("Authorization") auth: String = "Bearer ${Variables.ACCESS_TOKEN}"
+    ): Call<GetEmployeesResponse>
 
     /*  @Headers("Content-type: application/json")
       @POST("/path/{userId}")
