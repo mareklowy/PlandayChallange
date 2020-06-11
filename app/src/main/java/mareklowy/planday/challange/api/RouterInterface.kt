@@ -3,6 +3,7 @@ package mareklowy.planday.challange.api
 //import mareklowy.planday.challange.BuildConfig
 import mareklowy.planday.challange.BuildConfig
 import mareklowy.planday.challange.api.responses.AuthResponse
+import mareklowy.planday.challange.api.responses.GetDepartmentsResponse
 import mareklowy.planday.challange.api.responses.GetEmployeesResponse
 import mareklowy.planday.challange.helpers.Constants
 import mareklowy.planday.challange.helpers.Variables
@@ -51,11 +52,17 @@ interface RouterInterface {
         @Field("refresh_token") refresh_token: String = Constants.REFRESH_TOKEN
     ): Call<AuthResponse>
 
-    @GET("hr/v1.0/employees")
+    @GET("employees")
     fun getEmployees(
         @Header("X-ClientId") client_id: String = Constants.CLIENT_ID,
         @Header("Authorization") auth: String = "Bearer ${Variables.ACCESS_TOKEN}"
     ): Call<GetEmployeesResponse>
+
+    @GET("departments")
+    fun getDepartments(
+        @Header("X-ClientId") client_id: String = Constants.CLIENT_ID,
+        @Header("Authorization") auth: String = "Bearer ${Variables.ACCESS_TOKEN}"
+    ): Call<GetDepartmentsResponse>
 
     /*  @Headers("Content-type: application/json")
       @POST("/path/{userId}")

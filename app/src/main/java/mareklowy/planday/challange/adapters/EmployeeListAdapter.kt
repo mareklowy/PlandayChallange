@@ -9,12 +9,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.cell_employee.view.*
 import mareklowy.planday.challange.R
+import mareklowy.planday.challange.api.data.DepartmentData
 import mareklowy.planday.challange.api.data.EmployeeData
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class EmployeeListAdapter(
     private val context: Context?,
     var employees: List<EmployeeData>,
+    var departments: List<DepartmentData>,
     var onClick: (employee: EmployeeData) -> Unit
 ) : RecyclerView.Adapter<EmployeeListAdapter.EmployeeViewHolder>() {
 
@@ -44,6 +46,14 @@ class EmployeeListAdapter(
                     .load(R.drawable.dw_profile_placeholder)
                     .apply(RequestOptions.circleCropTransform())
                     .into(employee_cell_image_imageview)
+
+                val employeeDepartments: MutableList<String> = mutableListOf()
+                employee.departments?.forEach { departmentId ->
+                    val name = departments.find { it.id == departmentId }?.name ?: ""
+                    employeeDepartments.add(name)
+                }
+                val departmentsText = employeeDepartments.joinToString(", ")
+                employee_cell_departments_textview.text = "Departments: $departmentsText"
 
                 view.onClick {
                     this@EmployeeListAdapter.onClick

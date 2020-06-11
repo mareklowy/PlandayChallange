@@ -1,7 +1,6 @@
 package mareklowy.planday.challange.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_employee_list.*
 import mareklowy.planday.challange.R
 import mareklowy.planday.challange.adapters.EmployeeListAdapter
-import mareklowy.planday.challange.api.ApiResponseType
-import mareklowy.planday.challange.api.DataProvider
 import mareklowy.planday.challange.api.data.EmployeeData
+import mareklowy.planday.challange.helpers.DataHelper
 
 class EmployeeListFragment : Fragment() {
 
@@ -35,12 +33,14 @@ class EmployeeListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        DataProvider.getEmployees { response, employees ->
-            Log.d("EMP", "Employees: ${employees?.size ?: "NULL"}")
-            if (response.type == ApiResponseType.SUCCESS) {
+        //DataHelper class serves as cache to prevent repeated calls to the API
+        DataHelper.getDepartments { departments ->
+            DataHelper.getEmployees { employees ->
                 employees_list_recyclerview?.apply {
                     (adapter as EmployeeListAdapter).employees = employees ?: listOf()
+                    (adapter as EmployeeListAdapter).departments = departments ?: listOf()
                     (adapter as EmployeeListAdapter).notifyDataSetChanged()
+
                 }
             }
         }
@@ -49,7 +49,7 @@ class EmployeeListFragment : Fragment() {
     private fun setupRecycler() {
         employees_list_recyclerview.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = EmployeeListAdapter(context, listOf()) {
+            adapter = EmployeeListAdapter(context, listOf(), listOf()) {
                 loadEmployee(it)
             }
         }

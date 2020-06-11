@@ -1,8 +1,10 @@
 package mareklowy.planday.challange.api
 
 import android.util.Log
+import mareklowy.planday.challange.api.data.DepartmentData
 import mareklowy.planday.challange.api.data.EmployeeData
 import mareklowy.planday.challange.api.responses.AuthResponse
+import mareklowy.planday.challange.api.responses.GetDepartmentsResponse
 import mareklowy.planday.challange.api.responses.GetEmployeesResponse
 import mareklowy.planday.challange.helpers.Variables
 import retrofit2.Call
@@ -70,6 +72,36 @@ object DataProvider {
 
             override fun onFailure(call: Call<GetEmployeesResponse>, t: Throwable) {
                 Log.d("getEmployees", t.toString())
+                completion(ApiResponse(500), null)
+            }
+        })
+    }
+
+    fun getDepartments(completion: (response: ApiResponse, departments: List<DepartmentData>?) -> Unit) {
+        val call = routerService.getDepartments()
+
+        call.enqueue(object : Callback<GetDepartmentsResponse> {
+            override fun onResponse(
+                call: Call<GetDepartmentsResponse>?,
+                response: Response<GetDepartmentsResponse>?
+            ) {
+                response?.code()?.also { statusCode ->
+                    when (statusCode) {
+                        200, 201 -> {
+                            response.body()?.also {
+                                completion(ApiResponse(statusCode), it.data)
+                            }
+                        }
+
+                        else -> {
+                            completion(ApiResponse(statusCode), null)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<GetDepartmentsResponse>, t: Throwable) {
+                Log.d("getDepartments", t.toString())
                 completion(ApiResponse(500), null)
             }
         })
