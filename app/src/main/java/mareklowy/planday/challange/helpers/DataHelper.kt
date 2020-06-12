@@ -9,11 +9,12 @@ object DataHelper {
 
     private var employees: List<EmployeeData>? = null
     private var departments: List<DepartmentData>? = null
+    private var updateRequired = true
 
     //This data could be refreshed on regular time interval
 
     fun getEmployees(completion: (employees: List<EmployeeData>) -> Unit) {
-        if (employees != null) return completion(employees ?: listOf())
+        if (employees != null && !updateRequired) return completion(employees ?: listOf())
         else {
             DataProvider.getEmployees { response, employees ->
                 if (response.type == ApiResponseType.SUCCESS) {
@@ -27,7 +28,7 @@ object DataHelper {
     }
 
     fun getDepartments(completion: (departments: List<DepartmentData>) -> Unit) {
-        if (departments != null) return completion(departments ?: listOf())
+        if (departments != null && !updateRequired) return completion(departments ?: listOf())
         else {
             DataProvider.getDepartments { response, departments ->
                 if (response.type == ApiResponseType.SUCCESS) {

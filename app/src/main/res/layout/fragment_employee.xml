@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.EmployeeFragment">
+
+    <ImageView
+        android:id="@+id/employee_picture_imageview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/employee_first_name_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:enabled="false"
+        android:paddingTop="0dp"
+        android:paddingBottom="8dp"
+        android:text="First Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/employee_second_name_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:enabled="false"
+        android:paddingTop="0dp"
+        android:paddingBottom="8dp"
+        android:text="Second Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/employee_first_name_edittext" />
+
+    <EditText
+        android:id="@+id/employee_gender_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:enabled="false"
+        android:paddingTop="0dp"
+        android:paddingBottom="8dp"
+        android:text="Gender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/employee_second_name_edittext" />
+
+    <Button
+        android:id="@+id/employee_edit_button"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="128dp"
+        android:background="@drawable/dw_button_rounded"
+        android:elevation="8dp"
+        android:text="Edit"
+        android:textAllCaps="false"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/employee_save_button"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="128dp"
+        android:background="@drawable/dw_button_rounded"
+        android:elevation="8dp"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/employee_cancel_button"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/dw_button_rounded"
+        android:elevation="8dp"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

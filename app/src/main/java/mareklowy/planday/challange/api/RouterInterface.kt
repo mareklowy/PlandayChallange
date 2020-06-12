@@ -2,6 +2,7 @@ package mareklowy.planday.challange.api
 
 //import mareklowy.planday.challange.BuildConfig
 import mareklowy.planday.challange.BuildConfig
+import mareklowy.planday.challange.api.requests.UpdateEmployeeRequest
 import mareklowy.planday.challange.api.responses.AuthResponse
 import mareklowy.planday.challange.api.responses.GetDepartmentsResponse
 import mareklowy.planday.challange.api.responses.GetEmployeesResponse
@@ -64,13 +65,12 @@ interface RouterInterface {
         @Header("Authorization") auth: String = "Bearer ${Variables.ACCESS_TOKEN}"
     ): Call<GetDepartmentsResponse>
 
-    /*  @Headers("Content-type: application/json")
-      @POST("/path/{userId}")
-      fun postExample(
-          @Body body: ExampleRequest,
-          @Header("x-api-key") apiKey: String = "User.currentlyLoggedInUser()?.apiKey",
-          @Path("userId") userId: String = "ID-666"
-      ): Call<Unit>*/
-
-
+    @Headers("Content-type: application/json")
+    @PUT("employees/{userId}")
+    fun updateEmployee(
+        @Path("userId") userId: Int,
+        @Body body: UpdateEmployeeRequest,
+        @Header("X-ClientId") client_id: String = Constants.CLIENT_ID,
+        @Header("Authorization") auth: String = "Bearer ${Variables.ACCESS_TOKEN}"
+    ): Call<Unit>
 }

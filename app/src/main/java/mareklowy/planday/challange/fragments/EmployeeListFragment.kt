@@ -11,6 +11,7 @@ import mareklowy.planday.challange.R
 import mareklowy.planday.challange.adapters.EmployeeListAdapter
 import mareklowy.planday.challange.api.data.EmployeeData
 import mareklowy.planday.challange.helpers.DataHelper
+import mareklowy.planday.challange.helpers.ScreenManager
 
 class EmployeeListFragment : Fragment() {
 
@@ -56,6 +57,8 @@ class EmployeeListFragment : Fragment() {
     }
 
     private fun loadEmployee(employee: EmployeeData) {
-        //
+        ScreenManager.replaceFrame(activity, EmployeeFragment().apply {
+            this.employee = employee
+        }, true)
     }
 }

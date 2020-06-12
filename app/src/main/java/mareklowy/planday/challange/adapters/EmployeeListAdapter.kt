@@ -56,7 +56,7 @@ class EmployeeListAdapter(
                 employee_cell_departments_textview.text = "Departments: $departmentsText"
 
                 view.onClick {
-                    this@EmployeeListAdapter.onClick
+                    this@EmployeeListAdapter.onClick(employee)
                 }
             }
         }
